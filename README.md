@@ -14,9 +14,9 @@ If the water level becomes dangerous, the system automatically sends an SMS aler
 
 ## Project Progress
 
-- [○] Repository Created
-- [○] Lambda Created
-- [ ] DynamoDB Created
+- [〇] Repository Created
+- [〇] Lambda Created
+- [ 〇] DynamoDB Created
 - [ ] SNS Configured
 - [ ] API Gateway Configured
 - [ ] Website Created
