@@ -19,7 +19,7 @@ If the water level becomes dangerous, the system automatically sends an SMS aler
 - [〇] DynamoDB Created
 - [〇] Added River Data
 - [〇] Lambda Connected To DynamoDB
-- [ ] SNS Configured
+- [〇 ] SNS Configured
 - [ ] API Gateway Configured
 - [ ] Website Created
 - [ ] Project Completed
