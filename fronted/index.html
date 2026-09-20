@@ -28,17 +28,44 @@
 <p id="result"></p>
 
 <script>
-
-function sendRequest() {
+async function sendRequest() {
 
     let river =
         document.getElementById("river").value;
 
     document.getElementById("result").innerHTML =
-        "Selected River: " + river;
+        "Checking " + river + "...";
+
+    try {
+
+        const response = await fetch(
+            " https://mxmbdzidz1.execute-api.ap-northeast-3.amazonaws.com/alert",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    RiverName: river
+                })
+            }
+        );
+
+        const result = await response.text();
+
+        document.getElementById("result").innerHTML =
+            result;
+
+    }
+
+    catch(error) {
+
+        document.getElementById("result").innerHTML =
+            error;
+
+    }
 
 }
-
 </script>
 
 </body>
