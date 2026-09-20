@@ -1,2 +1,47 @@
 Terai Flood Alert System
 Flood warning project for Nepal Terai region.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Terai Flood Alert System</title>
+</head>
+<body>
+
+<h1>Terai Flood Alert System</h1>
+
+<label>Select River</label>
+
+<br><br>
+
+<select id="river">
+    <option>Bheri</option>
+    <option>Bagmati</option>
+    <option>Koshi</option>
+</select>
+
+<br><br>
+
+<button onclick="sendRequest()">
+    Check River
+</button>
+
+<br><br>
+
+<p id="result"></p>
+
+<script>
+
+function sendRequest() {
+
+    let river =
+        document.getElementById("river").value;
+
+    document.getElementById("result").innerHTML =
+        "Selected River: " + river;
+
+}
+
+</script>
+
+</body>
+</html>
