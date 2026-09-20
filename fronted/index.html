@@ -1,39 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Terai Flood Alert System</title>
+</head>
+<body>
+
+<h1>Terai Flood Alert System</h1>
+
+<label for="river">Select River</label>
+
+<br><br>
+
+<select id="river">
+    <option value="Bheri">Bheri</option>
+    <option value="Bagmati">Bagmati</option>
+    <option value="Koshi">Koshi</option>
+</select>
+
+<br><br>
+
+<button onclick="sendRequest()">
+    Check River
+</button>
+
+<br><br>
+
+<p id="result"></p>
+
+<script>
 async function sendRequest() {
+    let river = document.getElementById("river").value;
 
-    let river =
-        document.getElementById("river").value;
-
-    document.getElementById("result").innerHTML =
-        "Checking " + river + "...";
+    document.getElementById("result").innerHTML = "Checking " + river + "...";
 
     try {
+        const response = await fetch(
+            "https://mxmbdzidz1.execute-api.ap-northeast-3.amazonaws.com/alert",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    RiverName: river
+                })
+            }
+        );
 
-       const response = await fetch(
-    "https://mxmbdzidz1.execute-api.ap-northeast-3.amazonaws.com/alert",
-    {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            RiverName: river
-        })
+        const result = await response.text();
+        document.getElementById("result").innerHTML = result;
+
+    } catch(error) {
+        document.getElementById("result").innerHTML = "Error: " + error;
     }
-);
-
-        const result =
-            await response.text();
-
-        document.getElementById("result").innerHTML =
-            result;
-
-    }
-
-    catch(error) {
-
-        document.getElementById("result").innerHTML =
-            "Error: " + error;
-
-    }
-
 }
+</script>
+
+</body>
+</html>
