@@ -11,6 +11,10 @@ If the water level becomes dangerous, the system automatically sends an SMS aler
 - Amazon DynamoDB
 - Amazon SNS
 - Amazon API Gateway
+- GitHub pages
+- HTML
+- Javascript
+  
 
 ## Project Progress
 
