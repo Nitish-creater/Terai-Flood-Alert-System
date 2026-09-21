@@ -2,24 +2,49 @@
 <html>
 
 <head>
-<title>Terai Flood Alert System</title>
+    <title>Terai Flood Alert System</title>
 </head>
 
-<body style="background:#f4f8ff;font-family:Arial,sans-serif;text-align:center;padding-top:50px;">
+<body style="
+background:#f4f8ff;
+font-family:Arial,sans-serif;
+text-align:center;
+padding-top:50px;
+">
 
-<h1 style="color:#0066cc;font-size:40px;">
+<h1 style="
+color:#0066cc;
+font-size:45px;
+margin-bottom:10px;
+">
 🌊 Terai Flood Alert System
 </h1>
 
-<p style="font-size:20px;color:#666;">
-Monitor River Water Levels in Nepal
+<p style="
+font-size:20px;
+color:#555;
+margin-bottom:40px;
+">
+Real-Time River Monitoring & Flood Alerts For Nepal
 </p>
 
-<label for="river">Select River</label>
+<label for="river" style="
+font-size:18px;
+font-weight:bold;
+">
+Select River
+</label>
 
 <br><br>
 
-<select id="river" style="padding:10px;border-radius:8px;">
+<select id="river"
+style="
+padding:12px;
+font-size:18px;
+border-radius:10px;
+border:1px solid #ccc;
+width:220px;
+">
     <option value="Bheri">Bheri</option>
     <option value="Bagmati">Bagmati</option>
     <option value="Koshi">Koshi</option>
@@ -27,14 +52,38 @@ Monitor River Water Levels in Nepal
 
 <br><br>
 
-<button onclick="sendRequest()"
-style="background:#0078d4;color:white;padding:12px 25px;border:none;border-radius:10px;font-size:18px;cursor:pointer;">
-Check River
+<button
+onclick="sendRequest()"
+style="
+background:#0078d4;
+color:white;
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+">
+🚨 Check River
 </button>
 
 <br><br>
 
-<div id="result" style="font-size:22px;font-weight:bold;"></div>
+<div
+id="result"
+style="
+margin-top:30px;
+padding:20px;
+background:white;
+width:500px;
+margin-left:auto;
+margin-right:auto;
+border-radius:15px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+font-size:20px;
+font-weight:bold;
+">
+Results Will Appear Here
+</div>
 
 <script>
 
@@ -48,44 +97,55 @@ async function sendRequest() {
     try {
 
         const response = await fetch(
-        "https://mxmbdzidz1.execute-api.ap-northeast-3.amazonaws.com/alert",
-        {
-            method:"POST",
+            "https://mxmbdzidz1.execute-api.ap-northeast-3.amazonaws.com/alert",
+            {
+                method:"POST",
 
-            headers:{
-                "Content-Type":"application/json"
-            },
+                headers:{
+                    "Content-Type":"application/json"
+                },
 
-            body:JSON.stringify({
-                RiverName:river
-            })
-        });
+                body:JSON.stringify({
+                    RiverName:river
+                })
+            }
+        );
 
         const result = await response.text();
 
-        let box = document.getElementById("result");
+        let resultBox =
+        document.getElementById("result");
 
-        box.innerHTML = result;
+        resultBox.innerHTML = result;
 
         if(result.includes("Danger")){
-            box.style.color="red";
+            resultBox.style.color="red";
         }
         else if(result.includes("Warning")){
-            box.style.color="orange";
+            resultBox.style.color="orange";
         }
         else{
-            box.style.color="green";
+            resultBox.style.color="green";
         }
 
     }
+
     catch(error){
+
         document.getElementById("result").innerHTML =
-        "Error: "+error;
+        "Error: " + error;
+
     }
+
 }
 
 </script>
 
-</body>
+<hr style="margin-top:60px;">
 
+<p style="color:#777;">
+Developed by Nitish • Using AWS
+</p>
+
+</body>
 </html>
