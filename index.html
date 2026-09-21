@@ -1,10 +1,91 @@
 <!DOCTYPE html>
 <html>
-<body>
 
-<h1 style="color:red;">
-ROOT FILE TEST
+<head>
+<title>Terai Flood Alert System</title>
+</head>
+
+<body style="background:#f4f8ff;font-family:Arial,sans-serif;text-align:center;padding-top:50px;">
+
+<h1 style="color:#0066cc;font-size:40px;">
+🌊 Terai Flood Alert System
 </h1>
 
+<p style="font-size:20px;color:#666;">
+Monitor River Water Levels in Nepal
+</p>
+
+<label for="river">Select River</label>
+
+<br><br>
+
+<select id="river" style="padding:10px;border-radius:8px;">
+    <option value="Bheri">Bheri</option>
+    <option value="Bagmati">Bagmati</option>
+    <option value="Koshi">Koshi</option>
+</select>
+
+<br><br>
+
+<button onclick="sendRequest()"
+style="background:#0078d4;color:white;padding:12px 25px;border:none;border-radius:10px;font-size:18px;cursor:pointer;">
+Check River
+</button>
+
+<br><br>
+
+<div id="result" style="font-size:22px;font-weight:bold;"></div>
+
+<script>
+
+async function sendRequest() {
+
+    let river = document.getElementById("river").value;
+
+    document.getElementById("result").innerHTML =
+    "Checking " + river + "...";
+
+    try {
+
+        const response = await fetch(
+        "https://mxmbdzidz1.execute-api.ap-northeast-3.amazonaws.com/alert",
+        {
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+                RiverName:river
+            })
+        });
+
+        const result = await response.text();
+
+        let box = document.getElementById("result");
+
+        box.innerHTML = result;
+
+        if(result.includes("Danger")){
+            box.style.color="red";
+        }
+        else if(result.includes("Warning")){
+            box.style.color="orange";
+        }
+        else{
+            box.style.color="green";
+        }
+
+    }
+    catch(error){
+        document.getElementById("result").innerHTML =
+        "Error: "+error;
+    }
+}
+
+</script>
+
 </body>
+
 </html>
